@@ -180,7 +180,13 @@ Vincula o airflow a um repositorio git.
 # Instalar hell no airflow
 Comecar o deployment do airflow, comeca a instalacao no cluster kubernetes
 ```
-$ helm install airflow apache-airflow2/airflow -f airflow/custom_values.yaml -n airflow --debug
+$ git config --global user.name "Kelly Lyra"
+$ git config --global user.email kellylyra@gmail.com
+```
+
+
+```
+$ helm install airflow apache-airflow/airflow -f airflow7/custom_values.yaml -n airflow7 --debug
 ```
 
 

@@ -955,7 +955,7 @@ webserver:
     enabled: true
     role: Admin
     username: kellylyra
-    email: kelly_fl@hotmail.com
+    email: kellylyra@gmail.com
     firstName: Kelly
     lastName: Lyra
     password: admin
