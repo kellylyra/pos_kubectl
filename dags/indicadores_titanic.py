@@ -1,5 +1,4 @@
 from airflow.decorators import task, dag
-from airflow.operators.python import PythonOperator
 from airflow.operators.dummy import DummyOperator
 from airflow.models import Variable
 from datetime import datetime
