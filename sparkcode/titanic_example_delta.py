@@ -1,5 +1,6 @@
 from pyspark.sql import functions as f
 from pyspark.sql import SparkSession
+from delta.tables import *
 
 spark = (
     SparkSession.builder
@@ -11,7 +12,7 @@ spark = (
 
 spark.sparkContext.setLogLevel("WARN")
 
-from delta.tables import *
+
 
 print("Reading CSV file from S3...")
 
