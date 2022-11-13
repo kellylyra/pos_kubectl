@@ -59,7 +59,8 @@ $ aws ls s3
 ### Criar cluster
 ```
 $ eksctl create cluster \
-    --name=kubea3datatrabalho \
+    --name=kubea3datatrabalhokelly2 \
+    --version=1.21 \
     --managed \
     --instance-types=m5.xlarge \
     --alb-ingress-access --node-private-networking \
@@ -67,7 +68,8 @@ $ eksctl create cluster \
     --nodes-min=2 --nodes-max=3 \
     --full-ecr-access \
     --asg-access \
-    --nodegroup-name=ng-kubea3datatrabalho
+    --nodegroup-name=ng-kubea3datatrabalhokelly2 \
+    --timeout=60m
 ```
 ### Listar os contextos instanciados
 ```
@@ -81,7 +83,7 @@ $ kubectl get nodes
 
 ### Criar namespace
 ```
-$ kubectl create namespace airflow7
+$ kubectl create namespace airflow8
 ```
 
 ### Ver namespace
@@ -101,11 +103,20 @@ helm upgrade --install airflow apache-airflow/airflow --namespace airflow2 --cre
 
 ```
 $ helm repo add apache-airflow https://airflow.apache.org
-$ helm show values apache-airflow/airflow >> airflow7/custom_values.yaml
-$ helm upgrade --install airflow apache-airflow/airflow --namespace airflow7 --create-namespace
+$ helm show values apache-airflow/airflow >> airflow8/custom_values.yaml
+
+$ helm install airflow apache-airflow/airflow \
+    -f airflow8/custom_values.yaml \
+    -n airflow8 \
+    --create-namespace \
+    --version 1.7.0 \
+    --timeout 5m \
+    --debug
+
+$ helm upgrade --install airflow apache-airflow/airflow --namespace airflow8 --create-namespace
 ```
 
-helm show values apache-airflow/airflow >> airflow2/custom_values.yaml
+helm show values apache-airflow/airflow >> airflow8/custom_values.yaml
 
 
 helm uninstall airflow --namespace airflow
@@ -180,13 +191,19 @@ Vincula o airflow a um repositorio git.
 # Instalar hell no airflow
 Comecar o deployment do airflow, comeca a instalacao no cluster kubernetes
 ```
-$ git config --global user.name "Kelly Lyra"
+$ git config --global user.name "kellylyra"
 $ git config --global user.email kellylyra@gmail.com
 ```
 
 
 ```
-$ helm install airflow apache-airflow/airflow -f airflow7/custom_values.yaml -n airflow7 --debug
+$ helm install airflow apache-airflow/airflow -f airflow7/custom_values.yaml -n airflow7 --debug --dry-run
+
+helm upgrade airflow apache-airflow/airflow --namespace airflow7
+```
+
+```
+$ helm delete airflow --namespace airflow
 ```
 
 
@@ -198,23 +215,23 @@ $ astro dev start
 ```
 listar se esta rodando››
 ```
-$ kubectl get pods -n airflow2
+$ kubectl get pods -n airflow8
 ```
 
 listar os clusters
 ```
-$ kubectl get svc -n airflow2
+$ kubectl get svc -n airflow8
 ```
 
 # pagina web
 ```
-$ kubectl get pods -n airflow2
-$ kubectl get svc -n airflow2
+$ kubectl get pods -n airflow8
+$ kubectl get svc -n airflow8
 ```
 
 Colocar o caminho do DNS publico, que aparece no LoadBalancer, nao esquecer a porta :8080
 
-exemplo: ac8e9117980d04486bb584109ab4e186-28837794.us-east-1.elb.amazonaws.com:8080
+exemplo: a9af38c59f809435bb8f7b0cad44c0a0-439410570.us-east-1.elb.amazonaws.com:8080
 user: kelly.lyra
 senha: admin
 
@@ -326,5 +343,5 @@ $ kubectl delete pvc --all -n airflow
 # Deletar as stacks no CloudFormation
 
 ```
-$ eksctl delete cluster --region=us-east-1 --name=kubea3datatrabalho
+$ eksctl delete cluster --region=us-east-1 --name=kubea3datatrabalhokelly2
 ```

@@ -1,6 +1,6 @@
-
-$ eksctl create cluster \
-    --name=kubea3datatrabalho \
+eksctl create cluster \
+    --name=kubea3datatrabalhokelly2 \
+    --version=1.21 \
     --managed \
     --instance-types=m5.xlarge \
     --alb-ingress-access --node-private-networking \
@@ -8,4 +8,5 @@ $ eksctl create cluster \
     --nodes-min=2 --nodes-max=3 \
     --full-ecr-access \
     --asg-access \
-    --nodegroup-name=ng-kubea3datatrabalho
+    --nodegroup-name=ng-kubea3datatrabalhokelly2 \
+    --timeout=60m
