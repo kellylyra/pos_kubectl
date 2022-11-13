@@ -127,7 +127,7 @@ def indicadores_eleicoes2022():
                 'Ec2KeyName': 'ec2-kellylyra',
                 'KeepJobFlowAliveWhenNoSteps': True,
                 'TerminationProtected': False,
-                'Ec2SubnetId': 'subnet-09b06b5d8fc0d0062'
+                'Ec2SubnetId': 'subnet-0f5ebc9fd14bab5f9'
             },
 
             Applications=[{'Name': 'Spark'}],

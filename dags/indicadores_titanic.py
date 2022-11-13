@@ -63,7 +63,7 @@ def indicadores_titanic():
         return cluster_id["JobFlowId"]
 
 
-    @task
+      @task
     def wait_emr_cluster(cid: str):
         waiter = client.get_waiter('cluster_running')
 
